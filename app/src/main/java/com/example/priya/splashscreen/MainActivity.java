@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+    TextView net;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,10 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
+                        net.clearAnimation();
+                        net.setVisibility(View.INVISIBLE);
                         checkInternetConenction();
+
                     }
 
                     @Override
@@ -57,11 +61,11 @@ public class MainActivity extends AppCompatActivity {
         }).start();
 
         //blink animation
-        final TextView net=(TextView)findViewById(R.id.net);
+        net =(TextView)findViewById(R.id.net);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                net.clearAnimation();
+
                 Animation ani=AnimationUtils.loadAnimation(getApplicationContext(),R.anim.blink);
                 net.startAnimation(ani);
             }
@@ -79,9 +83,10 @@ public class MainActivity extends AppCompatActivity {
                 connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.CONNECTING ||
                 connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTING ||
                 connec.getNetworkInfo(1).getState() == android.net.NetworkInfo.State.CONNECTED ) {
+
             Intent i=new Intent(getApplicationContext(),Login.class);
             startActivity(i);
-            Toast.makeText(this, " Connected ", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, " Connected ", Toast.LENGTH_SHORT).show();
             return true;
         }else if (
                 connec.getNetworkInfo(0).getState() == android.net.NetworkInfo.State.DISCONNECTED ||
