@@ -16,9 +16,7 @@ import android.os.Handler;
 
 public class MainActivity extends AppCompatActivity {
 
-    ProgressBar progressBar;
-    int progress = 0;
-    Handler h = new Handler();
+
 
 
 
@@ -50,15 +48,16 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(1000);
                 } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(),"error", Toast.LENGTH_SHORT);
                 }
             }
 
         }).start();
 
 
-        final TextView net=(TextView)findViewById(R.id.textView);
+        final TextView net=(TextView)findViewById(R.id.net);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -68,31 +67,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
 
-      /*  progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 5; i++) {
-                    progress += 20;
-                    h.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressBar.setProgress(progress);
-                            if (progress == progressBar.getMax()) {
-                                //progressBar.setVisibility(View.INVISIBLE);
-                                checkInternetConenction();
 
-                            }
-                        }
-                    });
-                    try {
-                        Thread.sleep(1000);
-                    } catch (Exception e) {
-
-                    }
-                }
-            }
-        }).start();*/
 
     }
 
