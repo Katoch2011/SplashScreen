@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //rotation animation
         final ImageView image=(ImageView)findViewById(R.id.image);
         new Thread(new Runnable() {
             @Override
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         }).start();
 
-
+        //blink animation
         final TextView net=(TextView)findViewById(R.id.net);
         new Thread(new Runnable() {
             @Override
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+    //checking internet connection
     private boolean checkInternetConenction() {
 
         ConnectivityManager connec =(ConnectivityManager)getSystemService(getBaseContext().CONNECTIVITY_SERVICE);
